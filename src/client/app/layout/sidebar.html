@@ -1,0 +1,7 @@
+<div ng-controller="SidebarController as vm">
+    <ul class="nav nav-pills nav-stacked">
+        <li ng-class="{'active': vm.isCurrent(r)}" ng-repeat="r in vm.navRoutes">
+            <a href ui-sref="{{ r.name }}" ng-bind-html="r.settings.content"></a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,19 @@
+<div class="container" ng-controller="ShellController as vm">
+
+    <div class="row">
+        <div class="col-xs-3" ng-include="'app/layout/sidebar.html'"></div>
+
+        <main class="col-xs-9" ui-view></main>
+    </div>
+
+</div>
+
+
+<div ngplus-overlay
+     ngplus-overlay-delay-in="50"
+     ngplus-overlay-delay-out="700"
+     ngplus-overlay-animation="dissolve-animation">
+    <img src="/images/busy.gif"/>
+
+    <div class="page-spinner-message overlay-message">{{vm.busyMessage}}</div>
+</div>

@@ -1,0 +1,30 @@
+{
+    "id": "y7505d54-75b4-431b-adb2-eb6b9e546013",
+    "createdAt": "2015-01-15T15:52:01+0000",
+    "ownerId": "431bsa-75b4-431b-adb2-eb6b9e546013",
+    "name": "Prototype X",
+    "description": "Prototype X for this or that",
+    "status": 1,
+    "domainPrefix": "obi-x",
+    "adminPassword": null,
+    "events": [
+        {
+            "id": "bbc34qw3-75b4-431b-adb2-eb6b9e546013",
+            "codeName": "password",
+            "title": "Password reset",
+            "createdAt": "2005-08-15T15:52:01+0000",
+            "completed": false,
+            "error": false
+        },
+        {
+            "id": "abc34qw3-75b4-431b-adb2-eb6b9e546013",
+            "codeName": "create",
+            "title": "Project created",
+            "createdAt": "2005-08-15T15:52:01+0000",
+            "finishedAt": "2005-08-15T15:52:09+0000",
+            "completed": true,
+            "error": true,
+            "message": "Unrecognized error"
+        }
+    ]
+}
