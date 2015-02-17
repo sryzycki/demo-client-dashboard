@@ -6,6 +6,7 @@ module.exports = function(app) {
     app.get('/api/projects/y7505d54-75b4-431b-adb2-eb6b9e546013', getProjects1);
     app.get('/api/projects/y7505d54-75b4-431b-adb2-eb6b9e546014', getProjects2);
     app.get('/api/projects/y7505d54-75b4-431b-adb2-eb6b9e546015', getProjects3);
+    app.post('/api/projects', addProject);
 
     //////////////////////////////////////////////////
 
@@ -27,5 +28,11 @@ module.exports = function(app) {
     function getProjects3(req, res, next) {
         var json = jsonfileservice.getJsonFromFile(data + 'projects3.json');
         res.send(json);
+    }
+
+    function addProject(req, res, next) {
+        setTimeout(function() {
+            res.send(req.body);
+        }, 2000);
     }
 };

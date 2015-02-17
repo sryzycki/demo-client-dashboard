@@ -5,7 +5,7 @@
         .module('tscd.dashboard')
         .controller('DashboardAddController', DashboardAddController);
 
-    function DashboardAddController(logger) {
+    function DashboardAddController(logger, ProjectsService) {
         var vm = this;
         vm.project = getEmptyProject();
         vm.add = add;
@@ -32,14 +32,15 @@
 
 
         function add() {
+            console.log(vm.project);
+
             if (vm.form.$valid) {
                 // Submit as normal.
                 console.log('DashboardAddController - Adding a new project...');
+                ProjectsService.save(vm.project);
             } else {
                 console.log('DashboardAddController - Form invalid...');
             }
-
-            console.log(vm.project);
         }
 
 

@@ -3,6 +3,7 @@
 
     angular.module('tscd.dashboard', [
         'app.core',
-        'app.widgets'
+        'app.widgets',
+        'tscd.projects'
       ]);
 })();

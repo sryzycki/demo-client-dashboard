@@ -27,8 +27,10 @@
                     url: '/list',
                     templateUrl: 'app/tscd-dashboard/dashboard-list.html',
                     resolve: {
-                        promiseProjects: function(DashboardService) {
-                            return DashboardService.getProjects();
+                        projectsResource: 'ProjectsService',
+                        projectsPromise: function(projectsResource) {
+                            // Return the projects collection data promise.
+                            return projectsResource.query().$promise;
                         }
                     },
                     controller: 'DashboardListController',
@@ -46,8 +48,12 @@
                     url: '/detail/:detailId',
                     templateUrl: 'app/tscd-dashboard/dashboard-detail.html',
                     resolve: {
-                        promiseProject: function($stateParams, DashboardService) {
-                            return DashboardService.getProjects($stateParams.detailId);
+                        projectsResource: 'ProjectsService',
+                        projectPromise: function(projectsResource, $stateParams) {
+                            // Extract customer ID from $stateParams.
+                            var projectId = $stateParams.detailId;
+                            // Return the project data promise.
+                            return projectsResource.get({projectId: projectId}).$promise;
                         }
                     },
                     controller: 'DashboardDetailController',
