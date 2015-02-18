@@ -17,6 +17,9 @@
                     abstract: true,
                     url: '/dashboard',
                     templateUrl: 'app/tscd-dashboard/dashboard.html',
+                    resolve: {
+                        projectsResource: 'ProjectsService'
+                    },
                     controller: 'DashboardController',
                     controllerAs: 'vm'
                 }
@@ -27,7 +30,6 @@
                     url: '/list',
                     templateUrl: 'app/tscd-dashboard/dashboard-list.html',
                     resolve: {
-                        projectsResource: 'ProjectsService',
                         projectsPromise: function(projectsResource) {
                             // Return the projects collection data promise.
                             return projectsResource.query().$promise;
@@ -48,7 +50,6 @@
                     url: '/detail/:detailId',
                     templateUrl: 'app/tscd-dashboard/dashboard-detail.html',
                     resolve: {
-                        projectsResource: 'ProjectsService',
                         projectPromise: function(projectsResource, $stateParams) {
                             // Extract customer ID from $stateParams.
                             var projectId = $stateParams.detailId;

@@ -22,7 +22,8 @@ app.use(logger('dev'));
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use(errorHandler.init);
 
-routes = require('./routes/index')(app);
+//routes = require('./routes/index')(app);
+routes = require('./routes/index2')(app);
 
 console.log('About to crank up node');
 console.log('PORT=' + port);

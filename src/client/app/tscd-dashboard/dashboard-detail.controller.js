@@ -5,9 +5,13 @@
         .module('tscd.dashboard')
         .controller('DashboardDetailController', DashboardDetailController);
 
-    function DashboardDetailController(logger, projectPromise) {
+    function DashboardDetailController(logger, projectPromise, ProjectsService) {
         var vm = this;
         vm.project = {};
+        vm.destroy = destroy;
+        vm.edit = edit;
+        vm.isEdited = false;
+        vm.save = save;
 
         activate();
 
@@ -22,9 +26,19 @@
         function getProject() {
             vm.project = projectPromise;
 
-            console.log(projectPromise);
-
             return vm.project;
+        }
+
+        function destroy() {
+            ProjectsService.delete({ projectId: projectPromise.id });
+        }
+
+        function edit() {
+            vm.isEdited = true;
+        }
+
+        function save() {
+            vm.isEdited = false;
         }
     }
 })();
