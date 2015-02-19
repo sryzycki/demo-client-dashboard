@@ -2,6 +2,10 @@
     <h1>Create a new obi</h1>
 </div>
 
+<p>
+    <button class="btn btn-primary" type="button" ng-click="vm.goToList()">Back to your obis list</button>
+</p>
+
 <form name="vm.form" novalidate ng-submit="vm.add()">
     <div class="form-group"
          ng-class="{'has-success': vm.form.name.$valid,
@@ -17,30 +21,40 @@
         </div>
     </div>
 
-    <div class="form-group"
-         ng-class="{'has-success': vm.form.domainPrefix.$valid,
-                    'has-error': vm.form.domainPrefix.$touched && vm.form.domainPrefix.$invalid}">
-        <label for="domainPrefix">Domain prefix</label>
-        <input class="form-control" type="text"  id="domainPrefix" placeholder="Enter a domain prefix"
-               name="domainPrefix" ng-model="vm.project.domainPrefix" ng-minlength="2" ng-maxlength="64"
-               tscd-ensure-unique required>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input class="form-control" type="text"  id="description" placeholder="Enter a description (optional)"
+               name="description" ng-model="vm.project.description">
+    </div>
 
-        <div class="error" ng-show="vm.form.$submitted || vm.form.domainPrefix.$touched">
-            <small class="error text-danger" ng-show="vm.form.domainPrefix.$error.required">
+    <div class="form-group"
+         ng-class="{'has-success': vm.form.domains.$valid,
+                    'has-error': vm.form.domains.$touched && vm.form.domains.$invalid}">
+        <label for="domains">Domain</label>
+        <div class="input-group">
+            <div class="input-group-addon">http://</div>
+            <input class="form-control" type="text"  id="domains" placeholder="Enter a domain"
+                   name="domains" ng-model="vm.project.domains" ng-minlength="2" ng-maxlength="64"
+                   tscd-ensure-unique required>
+            <div class="input-group-addon">.tstr.io</div>
+        </div>
+
+        <div class="error" ng-show="vm.form.$submitted || vm.form.domains.$touched">
+            <small class="error text-danger" ng-show="vm.form.domains.$error.required">
                 Domain prefix is required.
             </small>
-            <small class="error text-danger" ng-show="vm.form.domainPrefix.$error.minlength">
+            <small class="error text-danger" ng-show="vm.form.domains.$error.minlength">
                 Domain prefix is required to be at least 2 characters.
             </small>
-            <small class="error text-danger" ng-show="vm.form.domainPrefix.$error.maxlength">
+            <small class="error text-danger" ng-show="vm.form.domains.$error.maxlength">
                 Domain prefix cannot be longer than 64 characters.
             </small>
         </div>
-        <div class="pending" ng-show="vm.form.domainPrefix.$invalid || vm.form.domainPrefix.$pending">
-            <small class="pending text-info" ng-show="vm.form.domainPrefix.$pending.unique">
+        <div class="pending" ng-show="vm.form.domains.$invalid || vm.form.domains.$pending">
+            <small class="pending text-info" ng-show="vm.form.domains.$pending.unique">
                 <i class="fa fa-spinner fa-spin"></i> Checking if this domain is available...
             </small>
-            <small class="error text-danger" ng-show="vm.form.domainPrefix.$error.unique">
+            <small class="error text-danger" ng-show="vm.form.domains.$error.unique">
                 <i class="fa fa-exclamation-circle"></i> That name is taken. Please try another one.
             </small>
         </div>
@@ -66,7 +80,6 @@
     </div>
 
     <button class="btn btn-success" type="submit">Submit</button>
-    <button class="btn btn-danger" type="reset" ng-click="vm.reset()">Clear</button>
 </form>
 
 <hr/>

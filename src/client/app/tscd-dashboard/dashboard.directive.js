@@ -10,7 +10,7 @@
         // value is unique or already taken.
         //
         // Usage:
-        //  <input type="text" name="name" ng-model="obi.name" tscd-ensure-unique="name">
+        //  <input type="text" name="name" ng-model="vm.form.name" tscd-ensure-unique>
         var directive = {
             require: 'ngModel',
             link: link
@@ -22,7 +22,7 @@
 
         function link(scope, ele, attrs, ctrl) {
             // List of taken domains.
-            var domains = ['obi-x', 'obi-y', 'obi-z'];
+            var domains = ['xx', 'yy', 'zz'];
 
             ctrl.$asyncValidators.unique = function(modelValue, viewValue) {
                 if (ctrl.$isEmpty(modelValue)) {

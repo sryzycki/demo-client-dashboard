@@ -5,11 +5,11 @@
         .module('tscd.dashboard')
         .controller('DashboardAddController', DashboardAddController);
 
-    function DashboardAddController(logger, ProjectsService) {
+    function DashboardAddController(logger, ProjectsService, $state) {
         var vm = this;
         vm.project = getEmptyProject();
         vm.add = add;
-        vm.reset = reset;
+        vm.goToList = goToList;
 
         activate();
 
@@ -23,7 +23,8 @@
         function getEmptyProject() {
             var project = {
                 name: '',
-                domainPrefix: '',
+                description: '',
+                domains: '',
                 adminPassword: ''
             }
 
@@ -32,20 +33,36 @@
 
 
         function add() {
-            console.log(vm.project);
-
             if (vm.form.$valid) {
-                // Submit as normal.
                 console.log('DashboardAddController - Adding a new project...');
-                ProjectsService.save(vm.project);
+                var processedForm = processForm(vm.project);
+                ProjectsService.save(processedForm);
+
+                // Ad hoc.
+                $state.go('dashboard.list');
             } else {
                 console.log('DashboardAddController - Form invalid...');
             }
         }
 
 
-        function reset() {
+        // For the time being we accept only one domain per obi (e.g. "domains": "domain-name").
+        // In the future, the form object will have an array of domains.
+        function processForm(formObj) {
+            var form = angular.copy(formObj);
 
+            form.domains = [
+                {
+                    name: 'http://' + formObj.domains + '.tstr.io'
+                }
+            ];
+
+            return form;
+        }
+
+
+        function goToList() {
+            $state.go('dashboard.list');
         }
     }
 })();

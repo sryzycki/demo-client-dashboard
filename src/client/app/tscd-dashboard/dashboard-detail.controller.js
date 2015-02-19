@@ -5,7 +5,7 @@
         .module('tscd.dashboard')
         .controller('DashboardDetailController', DashboardDetailController);
 
-    function DashboardDetailController(logger, projectPromise, ProjectsService) {
+    function DashboardDetailController(logger, projectPromise, ProjectsService, $state) {
         var vm = this;
         vm.project = {};
         vm.destroy = destroy;
@@ -31,6 +31,8 @@
 
         function destroy() {
             ProjectsService.delete({ projectId: projectPromise.id });
+
+            $state.go('dashboard.list', {}, {reload: true});
         }
 
         function edit() {

@@ -10,7 +10,7 @@
     <thead>
         <tr>
             <th>Obi name</th>
-            <th>Domain Prefix</th>
+            <th>Domains</th>
             <th>Created</th>
             <th>Status</th>
             <th>&nbsp;</th>
@@ -19,7 +19,7 @@
     <tbody>
         <tr ng-repeat="item in vm.projects">
             <td>{{ item.name }}</td>
-            <td><a href ng-href="http://{{ item.domainPrefix }}.tstr.io" target="_blank">{{ item.domainPrefix }}.tstr.io</a></td>
+            <td><a href ng-href="http://{{ item.domains[0].name }}" target="_blank">{{ item.domains[0].name }}</a></td>
             <td>{{ item.createdAt }}</td>
             <td>{{ item.status }}</td>
             <td><a href ng-href="/dashboard/detail/{{ item.id }}">details</a></td>

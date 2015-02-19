@@ -26,10 +26,10 @@
                 </td>
             </tr>
             <tr>
-                <td>Domain prefix:</td>
+                <td>Domains:</td>
                 <td>
-                    <a href ng-href="http://{{ vm.project.domainPrefix }}.tstr.io" target="_blank">
-                        {{ vm.project.domainPrefix }}.tstr.io
+                    <a href ng-href="http://{{ vm.project.domains[0].name }}" target="_blank">
+                        {{ vm.project.domains[0].name }}
                     </a>
                 </td>
                 <td ng-show="vm.isEdited"></td>

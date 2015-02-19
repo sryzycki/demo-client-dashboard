@@ -11,50 +11,27 @@ module.exports = function(app) {
             {
                 "id": "0",
                 "createdAt": "2015-01-15T15:52:01+0000",
-                "ownerId": "431bsa-75b4-431b-adb2-eb6b9e546013",
                 "name": "Prototype X",
                 "description": "Prototype X for this or that",
                 "status": 1,
-                "domainPrefix": "obi-x",
                 "adminPassword": null,
+                "domains": [
+                    {
+                        "name": "xx.tstr.io",
+                        "id": "c99e6e9a-c279-887a-faa2-c28ca2491768"
+                    }
+                ],
+                "backups": [],
                 "events": [
                     {
                         "id": "bbc34qw3-75b4-431b-adb2-eb6b9e546013",
                         "codeName": "password",
                         "title": "Password reset",
                         "createdAt": "2005-08-15T15:52:01+0000",
+                        "finishedAt": null,
                         "completed": false,
-                        "error": false
-                    },
-                    {
-                        "id": "abc34qw3-75b4-431b-adb2-eb6b9e546013",
-                        "codeName": "create",
-                        "title": "Project created",
-                        "createdAt": "2005-08-15T15:52:01+0000",
-                        "finishedAt": "2005-08-15T15:52:09+0000",
-                        "completed": true,
-                        "error": true,
-                        "message": "Unrecognized error"
-                    }
-                ]
-            },
-            {
-                "id": "1",
-                "createdAt": "2015-01-15T15:52:01+0000",
-                "ownerId": "431bsa-75b4-431b-adb2-eb6b9e546014",
-                "name": "Prototype Y",
-                "description": "Prototype Y for this or that",
-                "status": 1,
-                "domainPrefix": "obi-y",
-                "adminPassword": null,
-                "events": [
-                    {
-                        "id": "bbc34qw3-75b4-431b-adb2-eb6b9e546014",
-                        "codeName": "password",
-                        "title": "Password reset",
-                        "createdAt": "2005-08-15T15:52:01+0000",
-                        "completed": false,
-                        "error": false
+                        "error": false,
+                        "message": null
                     },
                     {
                         "id": "abc34qw3-75b4-431b-adb2-eb6b9e546014",
@@ -69,25 +46,69 @@ module.exports = function(app) {
                 ]
             },
             {
-                "id": "2",
+                "id": "1",
                 "createdAt": "2015-01-15T15:52:01+0000",
-                "ownerId": "431bsa-75b4-431b-adb2-eb6b9e546015",
-                "name": "Prototype Z",
+                "name": "Prototype Y",
                 "description": "Prototype Y for this or that",
                 "status": 1,
-                "domainPrefix": "obi-z",
                 "adminPassword": null,
+                "domains": [
+                    {
+                        "name": "yy.tstr.io",
+                        "id": "c99e6e9a-c279-887a-faa2-c28ca2491769"
+                    }
+                ],
+                "backups": [],
                 "events": [
                     {
                         "id": "bbc34qw3-75b4-431b-adb2-eb6b9e546015",
                         "codeName": "password",
                         "title": "Password reset",
                         "createdAt": "2005-08-15T15:52:01+0000",
+                        "finishedAt": null,
                         "completed": false,
-                        "error": false
+                        "error": false,
+                        "message": null
                     },
                     {
-                        "id": "abc34qw3-75b4-431b-adb2-eb6b9e546015",
+                        "id": "abc34qw3-75b4-431b-adb2-eb6b9e546016",
+                        "codeName": "create",
+                        "title": "Project created",
+                        "createdAt": "2005-08-15T15:52:01+0000",
+                        "finishedAt": "2005-08-15T15:52:09+0000",
+                        "completed": true,
+                        "error": true,
+                        "message": "Unrecognized error"
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "createdAt": "2015-01-15T15:52:01+0000",
+                "name": "Prototype Z",
+                "description": "Prototype Z for this or that",
+                "status": 1,
+                "adminPassword": null,
+                "domains": [
+                    {
+                        "name": "zz.tstr.io",
+                        "id": "c99e6e9a-c279-887a-faa2-c28ca2491770"
+                    }
+                ],
+                "backups": [],
+                "events": [
+                    {
+                        "id": "bbc34qw3-75b4-431b-adb2-eb6b9e546017",
+                        "codeName": "password",
+                        "title": "Password reset",
+                        "createdAt": "2005-08-15T15:52:01+0000",
+                        "finishedAt": null,
+                        "completed": false,
+                        "error": false,
+                        "message": null
+                    },
+                    {
+                        "id": "abc34qw3-75b4-431b-adb2-eb6b9e546018",
                         "codeName": "create",
                         "title": "Project created",
                         "createdAt": "2005-08-15T15:52:01+0000",
@@ -215,28 +236,38 @@ module.exports = function(app) {
 
         var projectToSave = {
             "id": null,
-            "createdAt": "2015-01-15T17:46:01+0000",
+            "createdAt": "2015-01-15T15:52:01+0000",
             "name": project.name,
-            "description": "Prototype XYX for this or that",
+            "description": project.description || '',
             "status": 1,
-            "domainPrefix": project.domainPrefix,
             "adminPassword": project.adminPassword,
+            "domains": [
+                {
+                    "name": project.domains[0].name || 'default.domain.example.com',
+                    "id": "c99e6e9a-c279-887a-faa2-c28ca2491768"
+                }
+            ],
+            "backups": [],
             "events": [
                 {
-                    "id": "abc34qw3-75b4-431b-adb2-eb6b9e546013",
-                    "codeName": "create",
-                    "title": "Project created",
-                    "createdAt": "2005-08-15T15:52:01+0000",
-                    "completed": false,
-                    "error": false
-                },
-                {
-                    "id": "bbc34qw3-75b4-431b-adb2-eb6b9e546015",
+                    "id": "bbc34qw3-75b4-431b-adb2-eb6b9e546013",
                     "codeName": "password",
                     "title": "Password reset",
                     "createdAt": "2005-08-15T15:52:01+0000",
+                    "finishedAt": null,
+                    "completed": false,
+                    "error": false,
+                    "message": null
+                },
+                {
+                    "id": "abc34qw3-75b4-431b-adb2-eb6b9e546014",
+                    "codeName": "create",
+                    "title": "Project created",
+                    "createdAt": "2005-08-15T15:52:01+0000",
+                    "finishedAt": "2005-08-15T15:52:09+0000",
                     "completed": true,
-                    "error": false
+                    "error": true,
+                    "message": "Unrecognized error"
                 }
             ]
         };
