@@ -19,18 +19,16 @@
             logger.info('Activated Dashboard add View');
         }
 
-
         function getEmptyProject() {
             var project = {
                 name: '',
                 description: '',
                 domains: '',
                 adminPassword: ''
-            }
+            };
 
             return project;
         }
-
 
         function add() {
             if (vm.form.$valid) {
@@ -45,7 +43,6 @@
             }
         }
 
-
         // For the time being we accept only one domain per obi (e.g. "domains": "domain-name").
         // In the future, the form object will have an array of domains.
         function processForm(formObj) {
@@ -59,7 +56,6 @@
 
             return form;
         }
-
 
         function goToList() {
             $state.go('dashboard.list');

@@ -5,7 +5,7 @@
         .module('tscd.dashboard')
         .controller('DashboardListController', DashboardListController);
 
-    function DashboardListController(logger, projectsPromise) {
+    function DashboardListController(logger, projectsResource) {
         var vm = this;
         vm.projects = {};
 
@@ -20,7 +20,7 @@
         }
 
         function getProjects() {
-            vm.projects = projectsPromise;
+            vm.projects = projectsResource;
 
             return vm.projects;
         }

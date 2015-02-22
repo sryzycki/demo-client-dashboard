@@ -1,32 +1,31 @@
 /* jshint -W117, -W030 */
-describe('dashboard routes', function () {
-    describe('state', function () {
-        var controller;
-        var view = 'app/tscd-dashboard/dashboard.html';
+describe('Unit test: Dashboard Routes >>>', function () {
+    describe('State "dashboard.list"', function () {
+        var view = 'app/tscd-dashboard/dashboard-list.html';
 
         beforeEach(function() {
             module('tscd.dashboard', bard.fakeToastr);
-            bard.inject('$httpBackend', '$location', '$rootScope', '$state', '$templateCache');
+            bard.inject('$httpBackend', '$location', '$state', '$templateCache');
         });
 
         beforeEach(function() {
             $templateCache.put(view, '');
+            $httpBackend.when('GET', '/api/projects').respond(200);
+            $httpBackend.flush();
         });
 
         bard.verifyNoOutstandingHttpRequests();
 
-        it('should map state dashboard to url /', function() {
-            expect($state.href('dashboard', {})).to.equal('/');
+        it('should be mapped to url /dashboard-list.', function() {
+            expect($state.href('dashboard.list', {})).to.equal('/dashboard/list');
         });
 
-        it('should map /dashboard route to dashboard View template', function () {
-            expect($state.get('dashboard').templateUrl).to.equal(view);
+        it('should have Dashboard List view html assigned to it.', function () {
+            expect($state.get('dashboard.list').templateUrl).to.equal(view);
         });
 
-        it('of dashboard should work with $state.go', function () {
-            $state.go('dashboard');
-            $rootScope.$apply();
-            expect($state.is('dashboard'));
+        it('should be available through $state.go method.', function () {
+            $state.go('dashboard.list');
         });
     });
 });

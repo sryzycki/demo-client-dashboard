@@ -18,17 +18,5 @@ describe('ShellController', function() {
         it('should be created successfully', function () {
             expect(controller).to.be.defined;
         });
-
-        it('should show splash screen', function () {
-            expect(controller.showSplash).to.be.true;
-        });
-
-        it('should hide splash screen after timeout', function (done) {
-            $timeout(function() {
-                expect(controller.showSplash).to.be.false;
-                done();
-            }, 1000);
-            $timeout.flush();
-        });
     });
 });

@@ -18,10 +18,8 @@
                     url: '/dashboard',
                     templateUrl: 'app/tscd-dashboard/dashboard.html',
                     resolve: {
-                        projectsResource: 'ProjectsService'
-                    },
-                    controller: 'DashboardController',
-                    controllerAs: 'vm'
+                        projectsService: 'ProjectsService'
+                    }
                 }
             },
             {
@@ -30,9 +28,9 @@
                     url: '/list',
                     templateUrl: 'app/tscd-dashboard/dashboard-list.html',
                     resolve: {
-                        projectsPromise: function(projectsResource) {
+                        projectsResource: function(projectsService) {
                             // Return the projects collection data promise.
-                            return projectsResource.query().$promise;
+                            return projectsService.query().$promise;
                         }
                     },
                     controller: 'DashboardListController',
@@ -50,11 +48,11 @@
                     url: '/detail/:detailId',
                     templateUrl: 'app/tscd-dashboard/dashboard-detail.html',
                     resolve: {
-                        projectPromise: function(projectsResource, $stateParams) {
+                        projectResource: function(projectsService, $stateParams) {
                             // Extract customer ID from $stateParams.
                             var projectId = $stateParams.detailId;
                             // Return the project data promise.
-                            return projectsResource.get({projectId: projectId}).$promise;
+                            return projectsService.get({projectId: projectId}).$promise;
                         }
                     },
                     controller: 'DashboardDetailController',
