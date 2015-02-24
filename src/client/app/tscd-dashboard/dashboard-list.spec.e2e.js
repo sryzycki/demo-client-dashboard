@@ -1,4 +1,10 @@
-/* jshint -W117 */
+/* jshint  -W030, -W117 */
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
+chai.use(chaiAsPromised);
+
+var expect = chai.expect;
+
 var DashboardList = require('./dashboard-list.po.js');
 var DashboardAdd = require('./dashboard-add.po.js');
 
@@ -12,11 +18,11 @@ describe('E2E: Dashboard List >>>', function () {
     });
 
     it('The page has got "Dashboard list" in its <title>.', function () {
-        expect(browser.getTitle()).toContain('Dashboard list');
+        expect(browser.getTitle()).to.eventually.contain('Dashboard list');
     });
 
     it('Should have "add" button.', function () {
-        expect(dashboardList.addBtn.isPresent()).toBe(true);
+        expect(dashboardList.addBtn.isPresent()).to.be.ok;
     });
 
     it('Should show added project on the list.', function () {
@@ -28,6 +34,6 @@ describe('E2E: Dashboard List >>>', function () {
 
         dashboardAdd.submitBtn.click();
 
-        expect(dashboardList.tblRows.last().getText()).toContain('ChewyStuff');
+        expect(dashboardList.tblRows.last().getText()).to.eventually.contain('ChewyStuff');
     });
 });
