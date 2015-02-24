@@ -97,6 +97,11 @@ module.exports = function() {
         serverIntegrationSpecs: [],
 
         /**
+         * E2E
+         */
+        scenarios: client + '/**/*.spec.e2e.js',
+
+        /**
          * Node settings
          */
         nodeServer: './src/server/app.js',

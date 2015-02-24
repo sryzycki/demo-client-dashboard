@@ -14,14 +14,13 @@
     </style>
 
     <!--BEWARE of using any app styles as @media can screw up tests -->
-
-    <link rel="stylesheet" href="node_modules/mocha/mocha.css">
-
+    <link rel="stylesheet" href="/node_modules/mocha/mocha.css">
 </head>
 <body>
 
 <h1><a href="specs.html">Spec Runner</a></h1>
-<p><strong>Make sure the REMOTE server is running</strong><br/>
+<p>
+    <strong>Make sure the REMOTE server is running</strong><br/>
     Click on a <em>description title</em> to narrow the scope to just its specs
     (see "<a href="http://mochajs.github.io/mocha/#grep-option" target="_blank" title="MochaJS grep option">
         ?grep</a>" in address bar).<br/>
@@ -31,34 +30,34 @@
 
 <div id="mocha"></div>
 
-    <!-- inject:testlibraries:js -->
-    <!-- endinject -->
+<!-- inject:testlibraries:js -->
+<!-- endinject -->
 
-    <script>
-        expect = chai.expect;
-        AssertionError = chai.AssertionError;
-        mocha.setup('bdd');
-        mocha.traceIgnores = ['mocha.js', 'chai.js', 'angular.js'];
-    </script>
+<script>
+    expect = chai.expect;
+    AssertionError = chai.AssertionError;
+    mocha.setup('bdd');
+    mocha.traceIgnores = ['mocha.js', 'chai.js', 'angular.js'];
+</script>
 
-    <!-- bower:js -->
-    <!-- endbower -->
+<!-- bower:js -->
+<!-- endbower -->
 
-    <!-- inject:js -->
-    <!-- endinject -->
+<!-- inject:js -->
+<!-- endinject -->
 
-    <!-- inject:spechelpers:js -->
-    <!-- endinject -->
+<!-- inject:spechelpers:js -->
+<!-- endinject -->
 
-    <!-- inject:specs:js -->
-    <!-- endinject -->
+<!-- inject:specs:js -->
+<!-- endinject -->
 
-    <!-- inject:templates:js -->
-    <!-- endinject -->
+<!-- inject:templates:js -->
+<!-- endinject -->
 
-    <script>
-        mocha.run();
-    </script>
+<script>
+    mocha.run();
+</script>
 
 </body>
 </html>

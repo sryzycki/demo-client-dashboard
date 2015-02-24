@@ -3,6 +3,7 @@ var browserSync = require('browser-sync');
 var config = require('./gulp.config')();
 var del = require('del');
 var glob = require('glob');
+var gp = require('gulp-protractor');
 var gulp = require('gulp');
 var path = require('path');
 var _ = require('lodash');
@@ -315,6 +316,28 @@ gulp.task('autotest', function(done) {
 });
 
 /**
+ * Run e2e specs
+ *
+ * @return {Stream}
+ */
+gulp.task('test-e2e', ['vet'], function(done) {
+    runProtractor(done);
+});
+
+//gulp.task('test-e2eWebdriverUpdate', function(done) {
+//    log('');
+//    log('IMPORTANT: Make sure selenium-server-standalone-X.XX.X.jar filepath in your' +
+//    'protractor.conf.js is up to date');
+//    log('');
+//    gp.webdriver_update(done);
+//});
+//
+//gulp.task('test-e2eServer', function(done) {
+//    log('Setting up standalone Selenium server...');
+//    gp.webdriver_standalone(done);
+//});
+
+/**
  * serve the dev environment
  * --debug-brk or --debug
  * --nosync
@@ -368,8 +391,12 @@ gulp.task('bump', function() {
 function addWatchForFileReload(isDev) {
     if (isDev) {
         gulp.watch([config.cssToProcess], ['styles', browserSync.reload]);
-        gulp.watch([config.client + '**/*', '!' + config.cssToProcess], browserSync.reload)
-            .on('change', function(event) { changeEvent(event); });
+        gulp.watch(
+            [
+                config.client + '**/*', '!' + config.cssToProcess, '!' + config.scenarios
+            ],
+            browserSync.reload
+        ).on('change', function(event) { changeEvent(event); });
     }
     else {
         gulp.watch([config.cssToProcess, config.js, config.html], ['html', browserSync.reload])
@@ -537,6 +564,35 @@ function startTests(singleRun, done) {
         }
         done();
     }
+}
+
+/**
+ * Start the tests using Protractor.
+ * @param  {Function} done - Callback to fire when Protractor is done
+ * @return {Stream}
+ */
+function runProtractor(done) {
+    log('');
+    log('IMPORTANT: Make sure selenium-server-standalone-X.XX.X.jar filepath in your ' +
+    'protractor.conf.js is up to date');
+    log('');
+    log('Running e2e specs...');
+
+    return gulp
+        .src([config.scenarios], {read:false})
+        .pipe($.plumber())
+        .pipe(gp.protractor({
+            configFile: './protractor.conf.js'
+        }))
+        .on('error', function() {
+            log('Protractor error.');
+            done();
+        })
+        .on('end', function() {
+            log('Protractor end.');
+            done();
+        })
+        ;
 }
 
 /**

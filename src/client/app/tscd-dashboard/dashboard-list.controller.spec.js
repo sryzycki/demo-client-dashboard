@@ -27,4 +27,3 @@ describe('Unit test: DashboardListController >>>', function() {
         });
     });
 });
-
