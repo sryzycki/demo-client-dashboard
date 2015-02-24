@@ -5,7 +5,7 @@
         .module('tscd.support')
         .controller('SupportController', SupportController);
 
-    function SupportController($q, dataservice, logger) {
+    function SupportController(logger) {
         var vm = this;
         vm.title = 'Support';
 

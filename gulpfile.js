@@ -535,6 +535,8 @@ function startTests(singleRun, done) {
     var fork = require('child_process').fork;
     var karma = require('karma').server;
     var serverSpecs = config.serverIntegrationSpecs;
+    var e2eSpecs = [config.scenarios];
+    var allSpecs = [].concat(serverSpecs, e2eSpecs);
 
     if (args.startServers) {
         log('Starting servers');
@@ -543,9 +545,9 @@ function startTests(singleRun, done) {
         savedEnv.PORT = 8888;
         child = fork(config.nodeServer);
     } else {
-        if (serverSpecs && serverSpecs.length) {
-            log('excluding server-integration tests: ' + serverSpecs);
-            excludeFiles = serverSpecs;
+        if (allSpecs && allSpecs.length) {
+            log('excluding server-integration and e2e tests: ' + allSpecs);
+            excludeFiles = allSpecs;
         }
     }
 

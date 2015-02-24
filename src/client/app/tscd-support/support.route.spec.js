@@ -1,7 +1,6 @@
 /* jshint -W117, -W030 */
-describe('support routes', function () {
+describe('Unit: Support Routes >>>', function () {
     describe('state', function () {
-        var controller;
         var view = 'app/tscd-support/support.html';
 
         beforeEach(function() {

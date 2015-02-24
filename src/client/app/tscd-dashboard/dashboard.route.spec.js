@@ -1,5 +1,5 @@
 /* jshint -W117, -W030 */
-describe('Unit test: Dashboard Routes >>>', function () {
+describe('Unit: Dashboard Routes >>>', function () {
     describe('State "dashboard.list"', function () {
         var view = 'app/tscd-dashboard/dashboard-list.html';
 
