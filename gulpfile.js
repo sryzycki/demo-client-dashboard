@@ -393,7 +393,8 @@ function addWatchForFileReload(isDev) {
         gulp.watch([config.cssToProcess], ['styles', browserSync.reload]);
         gulp.watch(
             [
-                config.client + '**/*', '!' + config.cssToProcess, '!' + config.scenarios
+                config.client + '**/*',
+                '!' + config.cssToProcess, '!' + config.scenariosAllFiles
             ],
             browserSync.reload
         ).on('change', function(event) { changeEvent(event); });
@@ -535,7 +536,7 @@ function startTests(singleRun, done) {
     var fork = require('child_process').fork;
     var karma = require('karma').server;
     var serverSpecs = config.serverIntegrationSpecs;
-    var e2eSpecs = [config.scenarios];
+    var e2eSpecs = config.scenariosAllFiles;
     var allSpecs = [].concat(serverSpecs, e2eSpecs);
 
     if (args.startServers) {
@@ -574,10 +575,6 @@ function startTests(singleRun, done) {
  * @return {Stream}
  */
 function runProtractor(done) {
-    log('');
-    log('IMPORTANT: Make sure selenium-server-standalone-X.XX.X.jar filepath in your ' +
-    'protractor.conf.js is up to date');
-    log('');
     log('Running e2e specs...');
 
     return gulp

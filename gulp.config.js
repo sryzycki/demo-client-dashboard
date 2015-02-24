@@ -4,6 +4,8 @@ module.exports = function() {
     var clientApp = client + 'app/';
     var root = './';
     var specRunnerFile = 'specs.html';
+    var scenariosPo = client + '/**/*.po.js'; // Page Objects.
+    var scenarios = client + '/**/*.spec.e2e.js';
     var temp = './.tmp/';
     var wiredep = require('wiredep');
     var bowerFiles = wiredep({devDependencies: true})['js'];
@@ -99,7 +101,9 @@ module.exports = function() {
         /**
          * E2E
          */
-        scenarios: client + '/**/*.spec.e2e.js',
+        scenariosPo: scenariosPo,
+        scenarios: scenarios,
+        scenariosAllFiles: [scenariosPo, scenarios],
 
         /**
          * Node settings
