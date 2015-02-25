@@ -5,6 +5,7 @@ chai.use(chaiAsPromised);
 
 var expect = chai.expect;
 
+// Require Page Objects.
 var DashboardList = require('./dashboard-list.po.js');
 var DashboardAdd = require('./dashboard-add.po.js');
 
@@ -27,13 +28,9 @@ describe('E2E: Dashboard List >>>', function () {
 
     it('Should show added project on the list.', function () {
         dashboardList.addBtn.click();
+        dashboardAdd.populateAndSubmitForm();
 
-        dashboardAdd.nameInput.sendKeys('ChewyStuff');
-        dashboardAdd.domainsInput.sendKeys('haribo');
-        dashboardAdd.passwordInput.sendKeys('haribopassw');
-
-        dashboardAdd.submitBtn.click();
-
-        expect(dashboardList.tblRows.last().getText()).to.eventually.contain('ChewyStuff');
+        expect(dashboardList.lastProjectName.getText())
+            .to.eventually.contain(dashboardAdd.mockName);
     });
 });

@@ -8,7 +8,7 @@
     function DashboardDetailController(logger, projectResource, ProjectsService, $state) {
         var vm = this;
         vm.project = {};
-        vm.destroy = destroy;
+        vm.remove = remove;
         vm.edit = edit;
         vm.isEdited = false;
         vm.save = save;
@@ -29,7 +29,7 @@
             return vm.project;
         }
 
-        function destroy() {
+        function remove() {
             ProjectsService.delete({projectId: projectResource.id});
 
             $state.go('dashboard.list', {}, {reload: true});

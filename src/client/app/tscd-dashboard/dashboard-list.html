@@ -22,7 +22,7 @@
             <td><a href ng-href="http://{{ item.domains[0].name }}" target="_blank">{{ item.domains[0].name }}</a></td>
             <td>{{ item.createdAt }}</td>
             <td>{{ item.status }}</td>
-            <td><a href ng-href="/dashboard/detail/{{ item.id }}">details</a></td>
+            <td><a class="projects-table__show-details" href ng-href="/dashboard/detail/{{ item.id }}">details</a></td>
         </tr>
     </tbody>
 </table>

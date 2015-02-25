@@ -9,7 +9,7 @@ module.exports = function(app) {
     function ProjectsRepository() {
         this.projects = [
             {
-                'id': '0',
+                'id': 'y7505d54-75b4-431b-adb2-eb6b9e546013',
                 'createdAt': '2015-01-15T15:52:01+0000',
                 'name': 'Prototype X',
                 'description': 'Prototype X for this or that',
@@ -46,7 +46,7 @@ module.exports = function(app) {
                 ]
             },
             {
-                'id': '1',
+                'id': 'y7505d54-75b4-431b-adb2-eb6b9e546014',
                 'createdAt': '2015-01-15T15:52:01+0000',
                 'name': 'Prototype Y',
                 'description': 'Prototype Y for this or that',
@@ -83,7 +83,7 @@ module.exports = function(app) {
                 ]
             },
             {
-                'id': '2',
+                'id': 'y7505d54-75b4-431b-adb2-eb6b9e546015',
                 'createdAt': '2015-01-15T15:52:01+0000',
                 'name': 'Prototype Z',
                 'description': 'Prototype Z for this or that',
@@ -120,7 +120,6 @@ module.exports = function(app) {
                 ]
             }
         ];
-        this.nextId = 3;
     }
 
     /**
@@ -170,14 +169,26 @@ module.exports = function(app) {
     };
 
     /**
+     * Retrieve a new project id
+     * Returns: new project id string
+     */
+    ProjectsRepository.prototype.getId = function() {
+        var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var result = 'y7505d54-75b4-431b-adb2-';
+        for (var i = 12; i > 0; --i) {
+            result += chars[Math.round(Math.random() * (chars.length - 1))];
+        }
+        return result;
+    };
+
+    /**
      * Save a project (create or update)
      * Param: project the project to save
      */
     ProjectsRepository.prototype.save = function (project) {
-        if (project.id === null || project.id === 0) {
-            project.id = this.nextId;
+        if (project.id === null) {
+            project.id = projectsRepository.getId();
             this.projects.push(project);
-            this.nextId++;
         } else {
             var index = this.findIndex(project.id);
             this.projects[index] = project;
