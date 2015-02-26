@@ -1,5 +1,5 @@
 /* jshint -W117, -W030 */
-describe('Unit test: DashboardListController >>>', function() {
+describe('Unit: DashboardListController', function() {
     var controller;
     var projectsResource = mockData.getMockProjects();
 

@@ -19,14 +19,17 @@ module.exports = function(config) {
             '/': 'http://localhost:8888/'
         },
 
-        // preprocess matching files before serving them to the browser
-        // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+        // Preprocess matching files before serving them to the browser.
+        // Available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: gulpConfig.karma.preprocessors,
 
-        // test results reporter to use
-        // possible values: 'dots', 'progress', 'coverage'
-        // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress', 'coverage'],
+        // Reporters installed (see package.json): mocha, coverage, growl.
+        // Reporters available: https://npmjs.org/browse/keyword/karma-reporter
+        reporters: [
+            'mocha',
+            'coverage',
+            'growl'
+        ],
 
         coverageReporter: {
             type: 'lcov',
