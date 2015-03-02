@@ -1,10 +1,10 @@
 /* jshint -W117, -W030 */
-describe('ShellController', function() {
+describe('Unit: ShellController', function() {
     var controller;
 
     beforeEach(function() {
         bard.appModule('app.layout');
-        bard.inject('$controller', '$q', '$rootScope', '$timeout', 'dataservice');
+        bard.inject('$controller', '$rootScope');
     });
 
     beforeEach(function () {
@@ -14,9 +14,7 @@ describe('ShellController', function() {
 
     bard.verifyNoOutstandingHttpRequests();
 
-    describe('Shell controller', function() {
-        it('should be created successfully', function () {
-            expect(controller).to.be.defined;
-        });
+    it('Should be created successfully.', function () {
+        expect(controller).to.be.defined;
     });
 });

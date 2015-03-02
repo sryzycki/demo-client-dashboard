@@ -1,6 +1,6 @@
 /* jshint -W117, -W030 */
 describe('Unit: Support Routes', function () {
-    describe('state', function () {
+    describe('State "support" ...', function () {
         var view = 'app/tscd-support/support.html';
 
         beforeEach(function() {
@@ -14,18 +14,15 @@ describe('Unit: Support Routes', function () {
 
         bard.verifyNoOutstandingHttpRequests();
 
-        it('should map state support to url /support', function() {
-            expect($state.href('support', {})).to.equal('/support');
-        });
-
-        it('should map /support route to support View template', function () {
-            expect($state.get('support').templateUrl).to.equal(view);
-        });
-
-        it('of support should work with $state.go', function () {
-            $state.go('support');
+        it('Should load the Support view when accessing /support url.', function() {
+            $location.path('/support');
             $rootScope.$apply();
-            expect($state.is('support'));
+
+            expect($state.current.controller).to.equal('SupportController');
+        });
+
+        it('Should have Support view html assigned to it.', function () {
+            expect($state.get('support').templateUrl).to.equal(view);
         });
     });
 });

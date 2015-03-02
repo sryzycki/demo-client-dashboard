@@ -1,10 +1,10 @@
 <div class="page-header">
-    <h1>Manage your obi: <em>{{ vm.project.name }}</em></h1>
+    <h1>Manage your obi: <em>{{ ::vm.project.name }}</em></h1>
 </div>
 
 <form action="">
     <p>
-        <button class="btn btn-primary" type="button" ng-click="vm.edit()">Edit your obi</button>
+        <!--<button class="btn btn-primary" type="button" ng-click="vm.edit()">Edit your obi</button>-->
         <button class="btn btn-success" type="button" ng-click="vm.save()" ng-show="vm.isEdited">Save your changes</button>
         <button class="btn btn-danger" type="button" ng-click="vm.remove()">Destroy your obi</button>
     </p>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>Created at:</td>
-                <td>{{ vm.project.createdAt }}</td>
+                <td>{{ vm.project.createdAt | date: 'medium' }}</td>
                 <td ng-show="vm.isEdited"></td>
             </tr>
             <tr>

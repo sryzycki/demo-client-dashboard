@@ -21,7 +21,7 @@
 
         this.$get = RouterHelper;
 
-        function RouterHelper($location, $rootScope, $state, logger) {
+        function RouterHelper($log, $location, $rootScope, $state) {
             var handlingStateChangeError = false;
             var hasOtherwise = false;
             var stateCounts = {
@@ -65,7 +65,7 @@
                         var msg = 'Error routing to ' + destination + '. ' +
                             (error.data || '') + '. <br/>' + (error.statusText || '') +
                             ': ' + (error.status || '');
-                        logger.warning(msg, [toState]);
+                        $log.warn(msg, [toState]);
 
                         $location.path('/');
                     }

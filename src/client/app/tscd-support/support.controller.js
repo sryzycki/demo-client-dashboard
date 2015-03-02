@@ -5,7 +5,7 @@
         .module('tscd.support')
         .controller('SupportController', SupportController);
 
-    function SupportController(logger) {
+    function SupportController($log) {
         var vm = this;
         vm.title = 'Support';
 
@@ -14,7 +14,7 @@
         //////////////////////////////////////////////////
 
         function activate() {
-            logger.info('Activated Support View');
+            $log.info('Activated Support View');
         }
     }
 })();

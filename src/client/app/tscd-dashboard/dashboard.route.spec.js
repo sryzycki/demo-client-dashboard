@@ -5,12 +5,12 @@ describe('Unit: Dashboard Routes', function () {
         bard.inject('$rootScope', '$location', '$state', '$httpBackend', '$templateCache');
     });
 
-    describe('State "dashboard.list"', function () {
+    describe('State "dashboard.list" ...', function () {
         var view = 'app/tscd-dashboard/dashboard-list.html';
 
         beforeEach(function() {
             $templateCache.put(view, '');
-            $httpBackend.when('GET', '/api/projects').respond(200);
+            $httpBackend.when('GET', '/api/v1/projects').respond(200);
             $httpBackend.flush();
         });
 

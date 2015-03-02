@@ -3,13 +3,6 @@
 
     var core = angular.module('app.core');
 
-    core.config(toastrConfig);
-
-    function toastrConfig(toastr) {
-        toastr.options.timeOut = 4000;
-        toastr.options.positionClass = 'toast-bottom-right';
-    }
-
     var config = {
         appErrorPrefix: '[tsClientDashboard Error] ',
         appTitle: 'tsClientDashboard'

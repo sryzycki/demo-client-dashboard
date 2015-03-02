@@ -11,6 +11,6 @@ module.exports = function() {
         .element(by.css('.projects-table__show-details'));
 
     this.get = function() {
-        browser.get('/dashboard/list');
+        browser.get('/list');
     };
 };

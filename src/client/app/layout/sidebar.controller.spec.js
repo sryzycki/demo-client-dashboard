@@ -1,34 +1,28 @@
 /* jshint -W117, -W030 */
-describe('layout', function() {
-    describe('sidebar', function() {
-        var controller;
-        var views = {
-            dashboard: 'app/tscd-dashboard/dashboard.html',
-            customers: 'app/tscd-support/support.html'
-        };
+describe('Unit: SidebarController', function() {
+    var controller;
 
-        beforeEach(function() {
-            module('app.layout', bard.fakeToastr);
-            bard.inject('$controller', '$httpBackend', '$location',
-                          '$rootScope', '$state', 'routerHelper');
-        });
+    beforeEach(function() {
+        module('app.layout', bard.fakeToastr);
+        bard.inject('$controller', '$httpBackend', '$location',
+                      '$rootScope', '$state', 'routerHelper');
+    });
 
-        beforeEach(function() {
-            routerHelper.configureStates(mockData.getMockStates(), '/');
-            controller = $controller('SidebarController');
-            $rootScope.$apply();
-        });
+    beforeEach(function() {
+        routerHelper.configureStates(mockData.getMockStates(), '/');
+        controller = $controller('SidebarController');
+        $rootScope.$apply();
+    });
 
-        bard.verifyNoOutstandingHttpRequests();
+    bard.verifyNoOutstandingHttpRequests();
 
-        it('should have isCurrent() for / to return `current`', function() {
-            $location.path('/');
-            expect(controller.isCurrent($state.current)).to.equal('current');
-        });
+    it('Should have isCurrent() for / to return `current`.', function() {
+        $location.path('/');
+        expect(controller.isCurrent($state.current)).to.equal('current');
+    });
 
-        it('should have isCurrent() for non route not return `current`', function() {
-            $location.path('/invalid');
-            expect(controller.isCurrent({title: 'invalid'})).not.to.equal('current');
-        });
+    it('Should have isCurrent() for non route not return `current`.', function() {
+        $location.path('/invalid');
+        expect(controller.isCurrent({title: 'invalid'})).not.to.equal('current');
     });
 });

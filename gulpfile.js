@@ -94,7 +94,7 @@ gulp.task('wiredep', function() {
 });
 
 gulp.task('inject', ['wiredep', 'styles', 'templatecache'], function() {
-    log('Wire up css css into the html, after files are ready');
+    log('Wire up css into the html, after files are ready');
 
     return gulp
         .src(config.index)
@@ -226,7 +226,7 @@ gulp.task('html', ['test', 'inject'], function() {
         .pipe(cssAllFilter.restore())
         // Get the custom javascript
         .pipe(jsFilter)
-        .pipe($.ngAnnotate({add: true}))
+        .pipe($.ngAnnotate())
         .pipe($.uglify())
         .pipe(getHeader())
         .pipe(jsFilter.restore())
@@ -394,7 +394,9 @@ function addWatchForFileReload(isDev) {
         gulp.watch(
             [
                 config.client + '**/*',
-                '!' + config.cssToProcess, '!' + config.scenariosAllFiles
+                '!' + config.cssToProcess,
+                '!' + config.scenariosPo,
+                '!' + config.scenarios
             ],
             browserSync.reload
         ).on('change', function(event) { changeEvent(event); });

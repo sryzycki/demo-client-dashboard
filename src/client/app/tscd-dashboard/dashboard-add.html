@@ -3,90 +3,94 @@
 </div>
 
 <p>
-    <button class="btn btn-primary btn-back" type="button" ng-click="vm.goToList()">Back to your obis list</button>
+    <a class="btn btn-primary btn-back" href ui-sref="dashboard.list">Back to your obis list</a>
 </p>
 
-<form name="vm.form" novalidate ng-submit="vm.add()">
-    <div class="form-group"
-         ng-class="{'has-success': vm.form.name.$valid,
+<alert ng-repeat="alert in vm.alerts" type="{{ alert.type }}" close="vm.closeAlert($index)">
+    {{ alert.msg }}
+</alert>
+
+<form class="form" name="vm.form" novalidate ng-submit="vm.add()">
+    <fieldset ng-disabled="vm.formDisabled">
+        <div class="form-group"
+             ng-class="{'has-success': vm.form.name.$valid,
                     'has-error': vm.form.name.$touched && vm.form.name.$invalid}">
-        <label for="name">Name</label>
-        <input class="form-control" type="text" id="name" placeholder="Enter a name"
-               name="name" ng-model="vm.project.name" required>
-
-        <div class="error" ng-show="vm.form.$submitted || vm.form.name.$touched">
-            <small class="error text-danger" ng-show="vm.form.name.$error.required">
-                Name is required.
-            </small>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="description">Description</label>
-        <input class="form-control" type="text"  id="description" placeholder="Enter a description (optional)"
-               name="description" ng-model="vm.project.description">
-    </div>
-
-    <div class="form-group"
-         ng-class="{'has-success': vm.form.domains.$valid,
-                    'has-error': vm.form.domains.$touched && vm.form.domains.$invalid}">
-        <label for="domains">Domain</label>
-        <div class="input-group">
-            <div class="input-group-addon">http://</div>
-            <input class="form-control" type="text"  id="domains" placeholder="Enter a domain"
-                   name="domains" ng-model="vm.project.domains" ng-minlength="2" ng-maxlength="64"
-                   tscd-ensure-unique required>
-            <div class="input-group-addon">.tstr.io</div>
+            <label for="name">Name</label>
+            <input class="form-control" type="text" id="name" placeholder="Enter a name"
+                   name="name" ng-model="vm.project.name" maxlength="128" required>
+            <ng-messages class="error" for="vm.form.name.$error"
+                         ng-messages-include="app/widgets/tscd-form/messages.html"
+                         ng-show="vm.form.$submitted || vm.form.name.$touched"></ng-messages>
         </div>
 
-        <div class="error" ng-show="vm.form.$submitted || vm.form.domains.$touched">
-            <small class="error text-danger" ng-show="vm.form.domains.$error.required">
-                Domain prefix is required.
-            </small>
-            <small class="error text-danger" ng-show="vm.form.domains.$error.minlength">
-                Domain prefix is required to be at least 2 characters.
-            </small>
-            <small class="error text-danger" ng-show="vm.form.domains.$error.maxlength">
-                Domain prefix cannot be longer than 64 characters.
-            </small>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input class="form-control" type="text"  id="description" maxlength="255"
+                   placeholder="Enter a description (optional)" name="description"
+                   ng-model="vm.project.description">
         </div>
-        <div class="pending" ng-show="vm.form.domains.$invalid || vm.form.domains.$pending">
-            <small class="pending text-info" ng-show="vm.form.domains.$pending.unique">
-                <i class="fa fa-spinner fa-spin"></i> Checking if this domain is available...
-            </small>
-            <small class="error text-danger" ng-show="vm.form.domains.$error.unique">
-                <i class="fa fa-exclamation-circle"></i> That name is taken. Please try another one.
-            </small>
+
+        <div class="form-group" ng-class="{'has-success': vm.form.domains.$valid,
+            'has-error': vm.form.domains.$touched && vm.form.domains.$invalid}">
+            <label for="domains">Domain</label>
+            <div class="input-group">
+                <div class="input-group-addon">http://</div>
+                <input class="form-control" type="text"  id="domains" placeholder="Enter a domain"
+                       name="domains" ng-model="vm.project.domains" ng-minlength="2"
+                       ng-maxlength="64" ng-pattern="/^[-a-zA-Z0-9.]+$/i"
+                       ng-model-options="{ updateOn: 'default blur',
+                       debounce: {'default': 350, 'blur': 0} }"
+                       required>
+                <div class="input-group-addon">.tstr.io</div>
+            </div>
+            <ng-messages class="error" for="vm.form.domains.$error"
+                         ng-messages-include="app/widgets/tscd-form/messages.html"
+                         ng-show="vm.form.$submitted || vm.form.domains.$touched"></ng-messages>
+            <ng-messages class="error" for="vm.form.domains.$error"
+                         ng-messages-include="app/widgets/tscd-form/messages-dirty.html"
+                         ng-show="vm.form.domains.$dirty">
+                <small class="error text-danger" ng-message="pattern">
+                    Domain prefix can only have alphanumeric characters (a-z), a dot (".") and
+                    a hyphen ("-"), for example: xyz.my-name
+                </small>
+            </ng-messages>
+            <ng-messages class="pending" for="vm.form.domains.$pending"
+                         ng-messages-include="app/widgets/tscd-form/messages-pending.html"
+                         ng-show="vm.form.domains.$invalid ||
+                         vm.form.domains.$pending"></ng-messages>
         </div>
-    </div>
 
-    <div class="form-group" ng-class="{'has-success': vm.form.adminPassword.$valid,
-                                       'has-error': vm.form.adminPassword.$touched && vm.form.adminPassword.$invalid}">
-        <label for="adminPassword">Admin password</label>
-        <input class="form-control" type="password" id="adminPassword" placeholder="Enter a password"
-               name="adminPassword" ng-model="vm.project.adminPassword" ng-minlength="6" ng-maxlength="128" required>
+        <div class="form-group" ng-class="{'has-success': vm.form.adminPassword.$valid,
+        'has-error': vm.form.adminPassword.$touched && vm.form.adminPassword.$invalid}">
+            <label for="adminPassword">Admin password</label>
+            <input class="form-control" type="password" id="adminPassword"
+                   placeholder="Enter a password" name="adminPassword"
+                   ng-model="vm.project.adminPassword" ng-minlength="6" ng-maxlength="128"
+                   ng-model-options="{ updateOn: 'default blur',
+                   debounce: {'default': 350, 'blur': 0} }" required>
 
-        <div class="error" ng-show="vm.form.$submitted || vm.form.adminPassword.$touched">
-            <small class="error text-danger" ng-show="vm.form.adminPassword.$error.required">
-                Admin password is required.
-            </small>
-            <small class="error text-danger" ng-show="vm.form.adminPassword.$error.minlength">
-                Admin password is required to be at least 6 characters.
-            </small>
-            <small class="error text-danger" ng-show="vm.form.adminPassword.$error.maxlength">
-                Admin password cannot be longer than 128 characters.
-            </small>
+            <ng-messages class="error" for="vm.form.adminPassword.$error"
+                         ng-messages-include="app/widgets/tscd-form/messages.html"
+                         ng-show="vm.form.$submitted ||
+                         vm.form.adminPassword.$touched"></ng-messages>
+            <ng-messages class="error" for="vm.form.adminPassword.$error"
+                         ng-messages-include="app/widgets/tscd-form/messages-dirty.html"
+                         ng-show="vm.form.adminPassword.$dirty"></ng-messages>
         </div>
-    </div>
 
-    <button class="btn btn-success" type="submit">Submit</button>
+        <button class="btn btn-success" type="submit">Submit</button>
+    </fieldset>
 </form>
 
-<hr/>
+<!--<hr/>-->
 
-<div>
-    <p>Form debug:</p>
-    <pre>
-        {{ vm.project }}
-    </pre>
-</div>
+<!--<div>-->
+    <!--<p>Form debug:</p>-->
+    <!--<pre>{{ vm.project | json }}</pre>-->
+<!--</div>-->
+
+<!--<hr/>-->
+
+<!--<div>-->
+    <!--<pre>{{ vm.resourceResponse | json }}</pre>-->
+<!--</div>-->

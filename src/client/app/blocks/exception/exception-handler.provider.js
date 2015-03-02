@@ -27,29 +27,24 @@
         };
     }
 
-    config.$inject = ['$provide'];
-
     /**
      * Configure by setting an optional string value for appErrorPrefix.
      * Accessible via config.appErrorPrefix (via config value).
      * @param  {[type]} $provide
      * @return {[type]}
-     * @ngInject
      */
     function config($provide) {
         $provide.decorator('$exceptionHandler', extendExceptionHandler);
     }
 
-    extendExceptionHandler.$inject = ['$delegate', 'exceptionHandler', 'logger'];
-
     /**
      * Extend the $exceptionHandler service to also display a toast.
+     * @param  {Object} $log
      * @param  {Object} $delegate
      * @param  {Object} exceptionHandler
-     * @param  {Object} logger
      * @return {Function} the decorated $exceptionHandler service
      */
-    function extendExceptionHandler($delegate, exceptionHandler, logger) {
+    function extendExceptionHandler($log, $delegate, exceptionHandler) {
         return function(exception, cause) {
             var appErrorPrefix = exceptionHandler.config.appErrorPrefix || '';
             var errorData = {exception: exception, cause: cause};
@@ -64,7 +59,7 @@
              * @example
              *     throw { message: 'error message we added' };
              */
-            logger.error(exception.message, errorData);
+            $log.error(exception.message, errorData);
         };
     }
 })();

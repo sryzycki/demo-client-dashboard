@@ -5,7 +5,7 @@
         .module('tscd.dashboard')
         .controller('DashboardListController', DashboardListController);
 
-    function DashboardListController(logger, projectsResource) {
+    function DashboardListController($log, projectsResource) {
         var vm = this;
         vm.projects = {};
 
@@ -14,7 +14,7 @@
         //////////////////////////////////////////////////
 
         function activate() {
-            logger.info('Activated Dashboard list View');
+            $log.info('Activated Dashboard list View');
 
             getProjects();
         }

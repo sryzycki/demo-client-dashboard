@@ -26,11 +26,9 @@ describe('E2E: Dashboard List >>>', function () {
         expect(dashboardList.addBtn.isPresent()).to.be.ok;
     });
 
-    it('Should show added project on the list.', function () {
+    it('Should show "Add" state after a click on "Add" button.', function () {
         dashboardList.addBtn.click();
-        dashboardAdd.populateAndSubmitForm();
 
-        expect(dashboardList.lastProjectName.getText())
-            .to.eventually.contain(dashboardAdd.mockName);
+        expect(browser.getCurrentUrl()).to.eventually.contain('/dashboard/add');
     });
 });

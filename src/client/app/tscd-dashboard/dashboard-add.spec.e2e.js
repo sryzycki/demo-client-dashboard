@@ -27,20 +27,19 @@ describe('E2E: Dashboard Add >>>', function () {
     it('There is a back btn that goes to the projects list.', function () {
         dashboardAdd.showListBtn.click();
 
-        expect(browser.getCurrentUrl()).to.eventually.contain('/dashboard/list');
+        expect(browser.getCurrentUrl()).to.eventually.contain('/list');
     });
 
-    it('User can add a project, find it on the list and view its details.', function () {
+    it('User can add a project and gets redirected to its details view.', function () {
         dashboardAdd.populateAndSubmitForm();
         browser.waitForAngular();
-        dashboardList.lastProjectDetailViewLink.click();
 
-        expect(browser.getCurrentUrl()).to.eventually.contain('/dashboard/detail');
+        expect(browser.getCurrentUrl()).to.eventually.contain('/detail');
         expect(dashboardDetail.projectName.getText())
             .to.eventually.contain(dashboardAdd.mockName);
     });
 
-    it('Domain name needs to be a-z 0-9.', function() {
+    it.skip('Domain name needs to be a-z 0-9.', function() {
         expect(false).to.be.ok;
     });
 });

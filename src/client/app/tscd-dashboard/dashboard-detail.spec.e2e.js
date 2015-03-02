@@ -17,26 +17,22 @@ describe('E2E: Dashboard Detail >>>', function () {
     var dashboardDetail = new DashboardDetail();
 
     beforeEach(function () {
-        dashboardDetail.get();
+        dashboardAdd.get();
     });
 
     it('The page has got "Dashboard detail" in its <title>.', function () {
+        dashboardAdd.populateAndSubmitForm();
         expect(browser.getTitle()).to.eventually.contain('Dashboard detail');
     });
 
     it('Should display the project\'s name.', function () {
-        expect(dashboardDetail.projectName.getText()).to.eventually.equal('Prototype X');
+        dashboardAdd.populateAndSubmitForm();
+        expect(dashboardDetail.projectName.getText()).to.eventually.equal(dashboardAdd.mockName);
     });
 
     it('User can delete the project.', function() {
         var name = 'ToBeDeleted';
-
-        dashboardList.get();
-        dashboardList.addBtn.click();
         dashboardAdd.populateAndSubmitForm(name);
-        browser.waitForAngular();
-        dashboardList.lastProjectDetailViewLink.click();
-        browser.waitForAngular();
         dashboardDetail.deleteBtn.click();
         browser.waitForAngular();
 

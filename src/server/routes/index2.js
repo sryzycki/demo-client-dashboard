@@ -7,119 +7,7 @@ module.exports = function(app) {
      *
      */
     function ProjectsRepository() {
-        this.projects = [
-            {
-                'id': 'y7505d54-75b4-431b-adb2-eb6b9e546013',
-                'createdAt': '2015-01-15T15:52:01+0000',
-                'name': 'Prototype X',
-                'description': 'Prototype X for this or that',
-                'status': 1,
-                'adminPassword': null,
-                'domains': [
-                    {
-                        'name': 'xx.tstr.io',
-                        'id': 'c99e6e9a-c279-887a-faa2-c28ca2491768'
-                    }
-                ],
-                'backups': [],
-                'events': [
-                    {
-                        'id': 'bbc34qw3-75b4-431b-adb2-eb6b9e546013',
-                        'codeName': 'password',
-                        'title': 'Password reset',
-                        'createdAt': '2005-08-15T15:52:01+0000',
-                        'finishedAt': null,
-                        'completed': false,
-                        'error': false,
-                        'message': null
-                    },
-                    {
-                        'id': 'abc34qw3-75b4-431b-adb2-eb6b9e546014',
-                        'codeName': 'create',
-                        'title': 'Project created',
-                        'createdAt': '2005-08-15T15:52:01+0000',
-                        'finishedAt': '2005-08-15T15:52:09+0000',
-                        'completed': true,
-                        'error': true,
-                        'message': 'Unrecognized error'
-                    }
-                ]
-            },
-            {
-                'id': 'y7505d54-75b4-431b-adb2-eb6b9e546014',
-                'createdAt': '2015-01-15T15:52:01+0000',
-                'name': 'Prototype Y',
-                'description': 'Prototype Y for this or that',
-                'status': 1,
-                'adminPassword': null,
-                'domains': [
-                    {
-                        'name': 'yy.tstr.io',
-                        'id': 'c99e6e9a-c279-887a-faa2-c28ca2491769'
-                    }
-                ],
-                'backups': [],
-                'events': [
-                    {
-                        'id': 'bbc34qw3-75b4-431b-adb2-eb6b9e546015',
-                        'codeName': 'password',
-                        'title': 'Password reset',
-                        'createdAt': '2005-08-15T15:52:01+0000',
-                        'finishedAt': null,
-                        'completed': false,
-                        'error': false,
-                        'message': null
-                    },
-                    {
-                        'id': 'abc34qw3-75b4-431b-adb2-eb6b9e546016',
-                        'codeName': 'create',
-                        'title': 'Project created',
-                        'createdAt': '2005-08-15T15:52:01+0000',
-                        'finishedAt': '2005-08-15T15:52:09+0000',
-                        'completed': true,
-                        'error': true,
-                        'message': 'Unrecognized error'
-                    }
-                ]
-            },
-            {
-                'id': 'y7505d54-75b4-431b-adb2-eb6b9e546015',
-                'createdAt': '2015-01-15T15:52:01+0000',
-                'name': 'Prototype Z',
-                'description': 'Prototype Z for this or that',
-                'status': 1,
-                'adminPassword': null,
-                'domains': [
-                    {
-                        'name': 'zz.tstr.io',
-                        'id': 'c99e6e9a-c279-887a-faa2-c28ca2491770'
-                    }
-                ],
-                'backups': [],
-                'events': [
-                    {
-                        'id': 'bbc34qw3-75b4-431b-adb2-eb6b9e546017',
-                        'codeName': 'password',
-                        'title': 'Password reset',
-                        'createdAt': '2005-08-15T15:52:01+0000',
-                        'finishedAt': null,
-                        'completed': false,
-                        'error': false,
-                        'message': null
-                    },
-                    {
-                        'id': 'abc34qw3-75b4-431b-adb2-eb6b9e546018',
-                        'codeName': 'create',
-                        'title': 'Project created',
-                        'createdAt': '2005-08-15T15:52:01+0000',
-                        'finishedAt': '2005-08-15T15:52:09+0000',
-                        'completed': true,
-                        'error': true,
-                        'message': 'Unrecognized error'
-                    }
-                ]
-            }
-        ];
+        this.projects = [];
     }
 
     /**
@@ -214,20 +102,20 @@ module.exports = function(app) {
     var projectsRepository = new ProjectsRepository();
 
     /**
-     * HTTP GET /api/projects
+     * HTTP GET /api/v1/projects
      * Returns: array of projects in JSON format
      */
-    app.get('/api/projects', function (request, response) {
+    app.get('/api/v1/projects', function (request, response) {
         response.json(projectsRepository.findAll());
     });
 
     /**
-     * HTTP GET /api/projects/:projectId
+     * HTTP GET /api/v1/projects/:projectId
      * Param: :id is the unique identifier of the project you want to retrieve
      * Returns: the project with the specified :id in JSON format
      * Error: 404 HTTP code if the project doesn't exists
      */
-    app.get('/api/projects/:projectId', function (request, response) {
+    app.get('/api/v1/projects/:projectId', function (request, response) {
         var projectId = request.params.projectId;
 
         try {
@@ -238,12 +126,12 @@ module.exports = function(app) {
     });
 
     /**
-     * HTTP POST /api/projects
-     * Body Param: the JSON project you want to create
+     * HTTP POST /api/v1/projects
+     * Body Param: JSON object that contains a project property
      * Returns: 200 HTTP code
      */
-    app.post('/api/projects', function (request, response) {
-        var project = request.body;
+    app.post('/api/v1/projects', function (request, response) {
+        var project = request.body.project;
 
         var projectToSave = {
             'id': null,
@@ -283,9 +171,35 @@ module.exports = function(app) {
             ]
         };
 
-        projectsRepository.save(projectToSave);
+        var responseError = {
+            'error': {
+                'code': 400,
+                'message': 'Bad Request'
+            },
+            'errors': [
+                //{
+                //
+                //    'errorCode': 'validationError',
+                //    'message': '<<field>>: This property is required.'
+                //},
+                {
+                    'errorCode': 'domainValidationError',
+                    'message': 'Domain <<domainName>> is already taken.'
+                }
+                //{
+                //    'errorCode': 'subscriptionProjectsLimit',
+                //    'message': 'You have reached your projects limit. Please upgrade your subscription.'
+                //}
+            ]
+        };
 
-        response.json(projectToSave);
+        setTimeout(function() {
+            projectsRepository.save(projectToSave);
+            response.status(201).send(projectToSave);
+            //response.status(400).send(responseError);
+            //response.sendStatus(500);
+            //response.sendStatus(404);
+        }, 1000);
     });
 
     /**
@@ -314,13 +228,13 @@ module.exports = function(app) {
     //});
 
     /**
-     * HTTP DELETE /api/projects/:id
+     * HTTP DELETE /api/v1/projects/:id
      * Param: :id the unique identifier of the project you want to delete
      * Returns: 202 HTTP code - accepted for processing, check events for progress info
      * Error: 401 unauthorised, 403 forbidden and 404 not found HTTP codes
-     *        e.g. { "error": { "code": 404, "message": "Not Found" } }
+     *        e.g. { 'error': { 'code': 404, 'message': 'Not Found' } }
      */
-    app.delete('/api/projects/:projectId', function (request, response) {
+    app.delete('/api/v1/projects/:projectId', function (request, response) {
         try {
             var projectId = request.params.projectId;
 

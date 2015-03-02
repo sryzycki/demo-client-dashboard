@@ -19,15 +19,12 @@
   "dependencies": {
     "angular": "1.4.0-beta.4",
     "angular-animate": "1.4.0-beta.4",
+    "angular-messages": "1.4.0-beta.4",
     "angular-resource": "1.4.0-beta.4",
     "angular-sanitize": "1.4.0-beta.4",
     "angular-ui-router": "~0.2.12",
-    "bootstrap": "~3.3.0",
-    "extras.angular.plus": "~0.9.2",
     "font-awesome": "~4.2.0",
-    "jquery": "~2.1.0",
-    "moment": "~2.6.0",
-    "toastr": "~2.1.0"
+    "angular-bootstrap": "~0.12.1"
   },
   "resolutions": {
     "angular": "1.4.0-beta.4"

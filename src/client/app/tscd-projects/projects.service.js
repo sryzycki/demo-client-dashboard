@@ -6,6 +6,6 @@
         .factory('ProjectsService', ProjectsService);
 
     function ProjectsService($resource) {
-        return $resource('/api/projects/:projectId');
+        return $resource('/api/v1/projects/:projectId');
     }
 })();

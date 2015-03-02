@@ -5,7 +5,7 @@
         .module('tscd.dashboard')
         .controller('DashboardDetailController', DashboardDetailController);
 
-    function DashboardDetailController(logger, projectResource, ProjectsService, $state) {
+    function DashboardDetailController($log, projectResource, ProjectsService, $state) {
         var vm = this;
         vm.project = {};
         vm.remove = remove;
@@ -18,7 +18,7 @@
         //////////////////////////////////////////////////
 
         function activate() {
-            logger.info('Activated Dashboard detail View');
+            $log.info('Activated Dashboard detail View');
 
             getProject();
         }

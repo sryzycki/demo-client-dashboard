@@ -6,7 +6,7 @@
         .run(appRun);
 
     function appRun(routerHelper) {
-        routerHelper.configureStates(getStates(), '/dashboard/list');
+        routerHelper.configureStates(getStates(), '/list');
     }
 
     function getStates() {
@@ -15,7 +15,7 @@
                 state: 'dashboard',
                 config: {
                     abstract: true,
-                    url: '/dashboard',
+                    url: '/',
                     templateUrl: 'app/tscd-dashboard/dashboard.html',
                     resolve: {
                         projectsService: 'ProjectsService'
@@ -25,9 +25,10 @@
             {
                 state: 'dashboard.list',
                 config: {
-                    url: '/list',
+                    url: 'list',
                     templateUrl: 'app/tscd-dashboard/dashboard-list.html',
                     resolve: {
+                        /* @ngInject */
                         projectsResource: function(projectsService) {
                             // Return the projects collection data promise.
                             return projectsService.query().$promise;
@@ -45,9 +46,10 @@
             {
                 state: 'dashboard.detail',
                 config: {
-                    url: '/detail/:detailId',
+                    url: 'detail/:detailId',
                     templateUrl: 'app/tscd-dashboard/dashboard-detail.html',
                     resolve: {
+                        /* @ngInject */
                         projectResource: function(projectsService, $stateParams) {
                             // Extract customer ID from $stateParams.
                             var projectId = $stateParams.detailId;
@@ -63,7 +65,7 @@
             {
                 state: 'dashboard.add',
                 config: {
-                    url: '/add',
+                    url: 'add',
                     templateUrl: 'app/tscd-dashboard/dashboard-add.html',
                     controller: 'DashboardAddController',
                     controllerAs: 'vm',

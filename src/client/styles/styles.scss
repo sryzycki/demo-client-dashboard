@@ -1,3 +1,7 @@
+@import 'bootstrap/__bootstrap';
+
+
+
 // Customise Bootstrap .container element.
 .container {
     padding-top: 20px;
@@ -68,3 +72,9 @@
 //
 // end: NGPLUS OVERLAY
 //
+
+
+// Other
+fieldset[disabled] {
+    opacity: .5;
+}

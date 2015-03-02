@@ -25,6 +25,6 @@ module.exports = function() {
     };
 
     this.get = function() {
-        browser.get('/dashboard/add');
+        browser.get('/add');
     };
 };

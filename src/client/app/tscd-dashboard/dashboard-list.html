@@ -3,10 +3,13 @@
 </div>
 
 <p>
-    <a class="btn btn-primary btn-lg" href ng-href="/dashboard/add">Create a new obi</a>
+    <a class="btn btn-primary btn-lg" href ui-sref="dashboard.add">Create a new obi</a>
 </p>
 
-<table class="table table-striped table-hover">
+<p ng-if="!vm.projects.length">You haven't created any obis yet...</p>
+<p>{{ vm.count }}</p>
+
+<table class="table table-striped table-hover" ng-if="vm.projects.length">
     <thead>
         <tr>
             <th>Obi name</th>
@@ -17,12 +20,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="item in vm.projects">
+        <tr ng-repeat="item in ::vm.projects">
             <td>{{ item.name }}</td>
             <td><a href ng-href="http://{{ item.domains[0].name }}" target="_blank">{{ item.domains[0].name }}</a></td>
-            <td>{{ item.createdAt }}</td>
+            <td>{{ item.createdAt | date: 'medium' }}</td>
             <td>{{ item.status }}</td>
-            <td><a class="projects-table__show-details" href ng-href="/dashboard/detail/{{ item.id }}">details</a></td>
+            <td><a class="projects-table__show-details" href ng-href="/detail/{{ item.id }}">details</a></td>
         </tr>
     </tbody>
 </table>

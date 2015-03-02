@@ -5,7 +5,7 @@
         .module('app.layout')
         .controller('ShellController', ShellController);
 
-    function ShellController($timeout, config, logger) {
+    function ShellController($log, config) {
         var vm = this;
         vm.busyMessage = 'Please wait ...';
         vm.isBusy = true;
@@ -15,7 +15,7 @@
         //////////////////////////////////////////////////
 
         function activate() {
-            logger.success(config.appTitle + ' loaded!', null);
+            $log.info(config.appTitle + ' loaded!', null);
         }
     }
 })();
